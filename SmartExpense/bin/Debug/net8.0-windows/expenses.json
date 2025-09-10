@@ -1,0 +1,32 @@
+[
+  {
+    "amount": 12,
+    "description": "mua kem",
+    "date": "2025-09-10T21:32:26.8765339+07:00",
+    "category": "unknown"
+  },
+  {
+    "amount": 200,
+    "description": "an lau",
+    "date": "2025-09-10T21:32:26.8765339+07:00",
+    "category": "unknown"
+  },
+  {
+    "amount": 50,
+    "description": "an com ga",
+    "date": "2025-09-10T21:32:26.8765339+07:00",
+    "category": "unknown"
+  },
+  {
+    "amount": 70,
+    "description": "hu tieu",
+    "date": "2025-09-10T21:32:26.8765339+07:00",
+    "category": "unknown"
+  },
+  {
+    "amount": 100,
+    "description": "sua xe",
+    "date": "2025-09-10T21:32:26.8765339+07:00",
+    "category": "unknown"
+  }
+]

@@ -8,38 +8,76 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SmartExpense
-{
-    public partial class AddExpenseForm : Form
-    {
-        public AddExpenseForm()
-        {
+namespace SmartExpense {
+    public partial class AddExpenseForm : Form {
+        ExpenseManager manager = new ExpenseManager();
+
+        public AddExpenseForm() {
             InitializeComponent();
         }
 
-        private void dateLabel_Click(object sender, EventArgs e)
-        {
+        private void AmountLb(object sender, EventArgs e) {
+            try {
+                decimal amount = decimal.Parse(txtAmount.Text);
+                MessageBox.Show("Valid amount: " + amount);
+            }
+            catch (FormatException) {
+                MessageBox.Show("Invalid amount. Please enter a valid number.");
+            }
+        }
+
+        private void DateLb(object sender, EventArgs e) {
+            DateTime date = dateTimePicker1.Value;
+        }
+
+        private void DescriptionLb(object sender, EventArgs e) {
+            string description = txtDescription.Text;
+
+            if (!string.IsNullOrWhiteSpace(description)) {
+                MessageBox.Show("Valid description: " + description);
+            }
+            else {
+                MessageBox.Show("Descripton cannot be empty");
+            }
+        }
+
+        private void SaveLb(object sender, EventArgs e) {
+            decimal amount = decimal.Parse(txtAmount.Text);
+            string description = txtDescription.Text;
+            DateTime date = dateTimePicker1.Value;
+            string category = "unknown";
+
+            if (string.IsNullOrWhiteSpace(txtAmount.Text)) {
+                MessageBox.Show("Amount cannot be empty");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(description)) {
+                MessageBox.Show("Description cannot be empty");
+                return;
+            }
+
+            Expense newExpense = new Expense(amount, description, date, category);
+
+            manager.AddExpense(newExpense);
+
+            //dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = manager.Expenses;
+
+            MessageBox.Show("Save OK");
+        }
+        private void AddExpenseForm_Load(object sender, EventArgs e) {
+            manager.LoadExpensesFromFile();
+
+            //dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = manager.Expenses;
+        }
+
+        private void TxtAmount(object sender, EventArgs e) {
 
         }
 
-        private void descriptionLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void amountLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void saveLabel_Click(object sender, EventArgs e)
-        {
-            decimal amount = decimal.Parse(txtDescription.Text);
-            string description = txtAmount.Text;
-            string category = KMeans(description);
-            DateTime date = dateLabel.Text;
-
-            Expense newExpenese = new Expense(amount, description, category, date);
+        private void TxtDescription(object sender, EventArgs e) {
 
         }
 

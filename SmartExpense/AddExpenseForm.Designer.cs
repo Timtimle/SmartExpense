@@ -1,7 +1,5 @@
-﻿namespace SmartExpense
-{
-    partial class AddExpenseForm
-    {
+﻿namespace SmartExpense {
+    partial class AddExpenseForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -13,8 +11,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,74 +23,119 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            txtAmount = new Label();
-            txtDescription = new Label();
-            dateLabel = new Label();
-            saveLabel = new Label();
+        private void InitializeComponent() {
+            AmountLabel = new Label();
+            DescriptionLabel = new Label();
+            DateLabel = new Label();
+            SaveLabel = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            txtAmount = new TextBox();
+            txtDescription = new TextBox();
+            dataGridViewExpenses = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).BeginInit();
             SuspendLayout();
+            // 
+            // AmountLabel
+            // 
+            AmountLabel.AutoSize = true;
+            AmountLabel.Location = new Point(12, 94);
+            AmountLabel.Name = "AmountLabel";
+            AmountLabel.Size = new Size(51, 15);
+            AmountLabel.TabIndex = 0;
+            AmountLabel.Text = "Amount";
+            AmountLabel.Click += AmountLb;
+            // 
+            // DescriptionLabel
+            // 
+            DescriptionLabel.AutoSize = true;
+            DescriptionLabel.Location = new Point(12, 126);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.Size = new Size(67, 15);
+            DescriptionLabel.TabIndex = 1;
+            DescriptionLabel.Text = "Description";
+            DescriptionLabel.Click += DescriptionLb;
+            // 
+            // DateLabel
+            // 
+            DateLabel.AutoSize = true;
+            DateLabel.Location = new Point(12, 159);
+            DateLabel.Name = "DateLabel";
+            DateLabel.Size = new Size(31, 15);
+            DateLabel.TabIndex = 2;
+            DateLabel.Text = "Date";
+            DateLabel.Click += DateLb;
+            // 
+            // SaveLabel
+            // 
+            SaveLabel.AutoSize = true;
+            SaveLabel.Location = new Point(12, 194);
+            SaveLabel.Name = "SaveLabel";
+            SaveLabel.Size = new Size(31, 15);
+            SaveLabel.TabIndex = 3;
+            SaveLabel.Text = "Save";
+            SaveLabel.Click += SaveLb;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(66, 159);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.TabIndex = 4;
             // 
             // txtAmount
             // 
-            txtAmount.AutoSize = true;
-            txtAmount.Location = new Point(12, 94);
+            txtAmount.Location = new Point(69, 86);
             txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(51, 15);
-            txtAmount.TabIndex = 0;
-            txtAmount.Text = "Amount";
-            txtAmount.Click += amountLabel_Click;
+            txtAmount.Size = new Size(100, 23);
+            txtAmount.TabIndex = 5;
+            txtAmount.TextChanged += TxtAmount;
             // 
             // txtDescription
             // 
-            txtDescription.AutoSize = true;
-            txtDescription.Location = new Point(12, 126);
+            txtDescription.Location = new Point(85, 118);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(67, 15);
-            txtDescription.TabIndex = 1;
-            txtDescription.Text = "Description";
-            txtDescription.Click += descriptionLabel_Click;
+            txtDescription.Size = new Size(100, 23);
+            txtDescription.TabIndex = 8;
+            txtDescription.TextChanged += TxtDescription;
             // 
-            // dateLabel
+            // dataGridViewExpenses
             // 
-            dateLabel.AutoSize = true;
-            dateLabel.Location = new Point(12, 159);
-            dateLabel.Name = "dateLabel";
-            dateLabel.Size = new Size(31, 15);
-            dateLabel.TabIndex = 2;
-            dateLabel.Text = "Date";
-            dateLabel.Click += dateLabel_Click;
-            // 
-            // saveLabel
-            // 
-            saveLabel.AutoSize = true;
-            saveLabel.Location = new Point(12, 194);
-            saveLabel.Name = "saveLabel";
-            saveLabel.Size = new Size(31, 15);
-            saveLabel.TabIndex = 3;
-            saveLabel.Text = "Save";
-            saveLabel.Click += saveLabel_Click;
+            dataGridViewExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewExpenses.Location = new Point(308, 36);
+            dataGridViewExpenses.Name = "dataGridViewExpenses";
+            dataGridViewExpenses.Size = new Size(480, 297);
+            dataGridViewExpenses.TabIndex = 9;
             // 
             // AddExpenseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(saveLabel);
-            Controls.Add(dateLabel);
+            Controls.Add(dataGridViewExpenses);
             Controls.Add(txtDescription);
             Controls.Add(txtAmount);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(SaveLabel);
+            Controls.Add(DateLabel);
+            Controls.Add(DescriptionLabel);
+            Controls.Add(AmountLabel);
             Name = "AddExpenseForm";
             Text = "AddExpenseForm";
+            Load += AddExpenseForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label txtAmount;
-        private Label txtDescription;
-        private Label dateLabel;
-        private Label saveLabel;
+        private Label AmountLabel;
+        private Label DescriptionLabel;
+        private Label DateLabel;
+        private Label SaveLabel;
+        private DateTimePicker dateTimePicker1;
+        private TextBox txtAmount;
+        private TextBox txtDescription;
+        private DataGridView dataGridViewExpenses;
     }
 }

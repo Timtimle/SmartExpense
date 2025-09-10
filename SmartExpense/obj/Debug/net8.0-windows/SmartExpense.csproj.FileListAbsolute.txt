@@ -15,3 +15,4 @@ E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.pdb
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.genruntimeconfig.cache
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\ref\SmartExpense.dll
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.AddExpenseForm.resources
+E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.sourcelink.json
