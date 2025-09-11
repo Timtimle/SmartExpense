@@ -61,7 +61,7 @@ namespace SmartExpense {
 
             manager.AddExpense(newExpense);
 
-            //dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = null;
             dataGridViewExpenses.DataSource = manager.Expenses;
 
             MessageBox.Show("Save OK");
@@ -69,7 +69,7 @@ namespace SmartExpense {
         private void AddExpenseForm_Load(object sender, EventArgs e) {
             manager.LoadExpensesFromFile();
 
-            //dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = null;
             dataGridViewExpenses.DataSource = manager.Expenses;
         }
 

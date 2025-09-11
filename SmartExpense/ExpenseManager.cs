@@ -7,16 +7,16 @@ using System.Text.Json;
 
 namespace SmartExpense {
     public class Expense {
-        public decimal amount { get; set; }
-        public string description { get; set; }
-        public DateTime date { get; set; }
-        public string category { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public string Category { get; set; }
 
         public Expense(decimal amount, string description, DateTime date, string category) {
-            this.amount = amount;
-            this.description = description;
-            this.date = date;
-            this.category = category;
+            this.Amount = amount;
+            this.Description = description;
+            this.Date = date;
+            this.Category = category;
         }
 
         public Expense() { }
