@@ -10,10 +10,11 @@ namespace SmartExpense {
         public ReportForm(ExpenseManager expense) {
             InitializeComponent();
             this.manager = expense;
+            this.Load += ReportForm_Load;
         }
 
         public void UpdateTotal() {
-            txtTotalExpenses.Text = manager.GetTotal().ToString("NO");
+            txtTotalExpenses.Text = manager.GetTotal().ToString("N0");
         }
 
         private void ReportForm_Load(object sender, EventArgs e) {
@@ -21,8 +22,9 @@ namespace SmartExpense {
             txtTotalExpenses.BorderStyle = BorderStyle.FixedSingle;
             txtTotalExpenses.AutoSize = false;
             txtTotalExpenses.TextAlign = ContentAlignment.MiddleLeft;
+            txtTotalExpenses.Size = new Size(100, 25);
 
-            
+            UpdateTotal();
         }
 
         private void totalExpenses_Click(object sender, EventArgs e) {
@@ -44,5 +46,6 @@ namespace SmartExpense {
         private void TxtTotalExpenses(object sender, EventArgs e) {
 
         }
+
     }
 }

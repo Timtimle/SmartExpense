@@ -90,7 +90,7 @@
             txtTotalExpenses.TabIndex = 6;
             txtTotalExpenses.Click += TxtTotalExpenses;
             // 
-            // Form1
+            // ReportForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -101,7 +101,7 @@
             Controls.Add(entertaimentLabel);
             Controls.Add(foodAnDrinkLabel);
             Controls.Add(totalExpensesLabel);
-            Name = "Form1";
+            Name = "ReportForm";
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();

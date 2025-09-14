@@ -89,6 +89,7 @@
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(100, 23);
             txtAmount.TabIndex = 5;
+            txtAmount.TextChanged += txtAmount_TextChanged;
             // 
             // txtDescription
             // 
