@@ -60,12 +60,15 @@ namespace SmartExpense {
             Expense newExpense = new Expense(amount, description, date, category);
 
             manager.AddExpense(newExpense);
+            
+            ReportForm report = new ReportForm(manager); // pass manager to ReportForm
 
             dataGridViewExpenses.DataSource = null;
             dataGridViewExpenses.DataSource = manager.Expenses;
 
             MessageBox.Show("Save OK");
         }
+
         private void AddExpenseForm_Load(object sender, EventArgs e) {
             manager.LoadExpensesFromFile();
 
@@ -73,13 +76,12 @@ namespace SmartExpense {
             dataGridViewExpenses.DataSource = manager.Expenses;
         }
 
-        private void TxtAmount(object sender, EventArgs e) {
-
+        private void DoneLabel_Click(object sender, EventArgs e) {
+            ReportForm form1 = new ReportForm();
+            form1.Show();
+            this.Hide();
         }
 
-        private void TxtDescription(object sender, EventArgs e) {
-
-        }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SmartExpense
 {
-    partial class Form1 {
+    partial class ReportForm {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -28,6 +28,8 @@
             foodAnDrinkLabel = new Label();
             entertaimentLabel = new Label();
             other = new Label();
+            label1 = new Label();
+            txtTotalExpenses = new Label();
             SuspendLayout();
             // 
             // totalExpensesLabel
@@ -65,16 +67,36 @@
             other.AutoSize = true;
             other.Location = new Point(12, 140);
             other.Name = "other";
-            other.Size = new Size(37, 15);
+            other.Size = new Size(58, 15);
             other.TabIndex = 3;
-            other.Text = "Other";
+            other.Text = "Shopping";
             other.Click += other_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 177);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Other";
+            // 
+            // txtTotalExpenses
+            // 
+            txtTotalExpenses.AutoSize = true;
+            txtTotalExpenses.Location = new Point(122, 29);
+            txtTotalExpenses.Name = "txtTotalExpenses";
+            txtTotalExpenses.Size = new Size(0, 15);
+            txtTotalExpenses.TabIndex = 6;
+            txtTotalExpenses.Click += TxtTotalExpenses;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(776, 450);
+            Controls.Add(txtTotalExpenses);
+            Controls.Add(label1);
             Controls.Add(other);
             Controls.Add(entertaimentLabel);
             Controls.Add(foodAnDrinkLabel);
@@ -91,5 +113,7 @@
         private Label foodAnDrinkLabel;
         private Label entertaimentLabel;
         private Label other;
+        private Label label1;
+        private Label txtTotalExpenses;
     }
 }

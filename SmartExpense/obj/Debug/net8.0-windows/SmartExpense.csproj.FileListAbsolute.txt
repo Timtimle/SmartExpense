@@ -3,7 +3,6 @@ E:\Projects\SmartExpense\SmartExpense\bin\Debug\net8.0-windows\SmartExpense.deps
 E:\Projects\SmartExpense\SmartExpense\bin\Debug\net8.0-windows\SmartExpense.runtimeconfig.json
 E:\Projects\SmartExpense\SmartExpense\bin\Debug\net8.0-windows\SmartExpense.dll
 E:\Projects\SmartExpense\SmartExpense\bin\Debug\net8.0-windows\SmartExpense.pdb
-E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.Form1.resources
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.csproj.GenerateResource.cache
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.GeneratedMSBuildEditorConfig.editorconfig
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.AssemblyInfoInputs.cache
@@ -16,3 +15,4 @@ E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.genr
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\ref\SmartExpense.dll
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.AddExpenseForm.resources
 E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.sourcelink.json
+E:\Projects\SmartExpense\SmartExpense\obj\Debug\net8.0-windows\SmartExpense.ReportForm.resources

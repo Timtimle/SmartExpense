@@ -32,6 +32,7 @@
             txtAmount = new TextBox();
             txtDescription = new TextBox();
             dataGridViewExpenses = new DataGridView();
+            done = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).BeginInit();
             SuspendLayout();
             // 
@@ -88,7 +89,6 @@
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(100, 23);
             txtAmount.TabIndex = 5;
-            txtAmount.TextChanged += TxtAmount;
             // 
             // txtDescription
             // 
@@ -96,7 +96,6 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(100, 23);
             txtDescription.TabIndex = 8;
-            txtDescription.TextChanged += TxtDescription;
             // 
             // dataGridViewExpenses
             // 
@@ -106,11 +105,22 @@
             dataGridViewExpenses.Size = new Size(480, 297);
             dataGridViewExpenses.TabIndex = 9;
             // 
+            // done
+            // 
+            done.Location = new Point(12, 241);
+            done.Name = "done";
+            done.Size = new Size(75, 23);
+            done.TabIndex = 10;
+            done.Text = "Done";
+            done.UseVisualStyleBackColor = true;
+            done.Click += DoneLabel_Click;
+            // 
             // AddExpenseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(done);
             Controls.Add(dataGridViewExpenses);
             Controls.Add(txtDescription);
             Controls.Add(txtAmount);
@@ -137,5 +147,6 @@
         private TextBox txtAmount;
         private TextBox txtDescription;
         private DataGridView dataGridViewExpenses;
+        private Button done;
     }
 }

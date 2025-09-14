@@ -27,9 +27,14 @@ namespace SmartExpense {
         private string filePath = "expenses.json";
 
         public List<Expense> Expenses => expenses;
+
         public void AddExpense(Expense expense) {
             expenses.Add(expense);
             SaveExpensesToFile();
+        }
+
+        public decimal GetTotal() {
+            return Expenses.Sum(x => x.Amount);
         }
 
         public void SaveExpensesToFile() {
@@ -43,17 +48,6 @@ namespace SmartExpense {
                 expenses = JsonSerializer.Deserialize<List<Expense>>(json);
             }
         }
-
-
     }
-    internal class KMeans {
-        private string category = "";
-        
-        public string Predict(string x) {
-            if (x.Contains("an")) category = "Food";
-            else if (x.Contains("choi")) category = "Entertaiment";
-            else category = "Other";
-            return category; 
-        }
-    }
+
 }
