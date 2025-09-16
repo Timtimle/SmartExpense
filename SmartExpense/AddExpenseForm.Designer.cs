@@ -114,7 +114,7 @@
             done.TabIndex = 10;
             done.Text = "Done";
             done.UseVisualStyleBackColor = true;
-            done.Click += DoneLabel_Click;
+            done.Click += DoneLb;
             // 
             // AddExpenseForm
             // 

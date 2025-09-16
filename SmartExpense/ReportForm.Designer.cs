@@ -103,6 +103,7 @@
             Controls.Add(totalExpensesLabel);
             Name = "ReportForm";
             Text = "Form1";
+            Load += ReportForm_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }

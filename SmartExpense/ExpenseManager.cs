@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.IO;
 
 namespace SmartExpense {
     public class Expense {
@@ -20,6 +21,116 @@ namespace SmartExpense {
         }
 
         public Expense() { }
+    }
+
+    public class ExpenseData {
+        public string Label { get; set; }
+        public string Text { get; set; }
+
+        public ExpenseData(string Label, string Text) {
+            this.Text = Text;
+            this.Label = Label;
+        }
+    }
+
+    public class DBG {
+        string filePath = "DBG_output.txt";
+
+        public void Out(List<ExpenseData> data) {
+            using (StreamWriter sw = new StreamWriter(filePath, false)) {
+                foreach (var val in data) {
+                    sw.WriteLine("Label : " + val.Label + " - Text: " + val.Text);
+                }
+            }
+            MessageBox.Show($"Đã xuất dữ liệu ra: {filePath}");
+        }
+    }
+
+    public interface IExpenseClassifer {
+        string Classify(string description);
+    }
+
+    public class RuleBasedClassifier : IExpenseClassifer {
+        public Dictionary<string, string[]> rules = new Dictionary<string, string[]> {
+            {"Ăn Uống", new string[] {"ăn", "uống", "cơm", "cà phê", "trà", "nước"} },
+            {"Mua Sắm", new string[] {"mua", "giày", "quần", "áo", "Shoppe", "Tiki", "Lazada", "Tiktok"} },
+            {"Giải Trí", new string[] {"xem", "phim", "game", "hát", "nhạc" } },
+        };
+
+        public string Classify(string description) {
+            description = description.ToLower();
+
+            foreach (var rule in rules) {
+                foreach (var keyword in rule.Value) {
+                    if (description.Contains(keyword)) {
+                        return rule.Key;
+                    }
+                }
+            }
+            return "Continue";
+        }
+    }
+
+    public class LogicsticRegression : IExpenseClassifer {
+        private List<ExpenseData> trainingData = new List<ExpenseData>();
+
+        public List<ExpenseData> LoadFromCsv(string filePath) {
+            List<ExpenseData> data = new List<ExpenseData>();
+
+            string[] lines = File.ReadAllLines(filePath);
+
+            for (int i = 1; i < lines.Length; ++i) {
+                string line = lines[i];
+                string[] parts = line.Split(',');
+
+                if (parts.Length >= 2) {
+                    data.Add(new ExpenseData(parts[0].Trim(), parts[1].Trim()));
+                }
+            }
+            return data;
+        }
+        public void LoadTrainingData() {
+            Vietnamese vietnamese = new Vietnamese();
+
+            List<ExpenseData> data1 = this.LoadFromCsv("Data/anuong.csv").Select(des => new ExpenseData(des.Label, vietnamese.RemoveDiacritics(des.Text))).ToList();
+            List<ExpenseData> data2 = this.LoadFromCsv("Data/muasam.csv").Select(des => new ExpenseData(des.Label, vietnamese.RemoveDiacritics(des.Text))).ToList();
+            List<ExpenseData> data3 = this.LoadFromCsv("Data/giaitri.csv").Select(des => new ExpenseData(des.Label, vietnamese.RemoveDiacritics(des.Text))).ToList();
+            List<ExpenseData> data4 = this.LoadFromCsv("Data/khac.csv").Select(des => new ExpenseData(des.Label, vietnamese.RemoveDiacritics(des.Text))).ToList();
+
+            DBG dbg = new DBG();
+            dbg.Out(data1);
+
+            trainingData.AddRange(data1);
+            trainingData.AddRange(data2);
+            trainingData.AddRange(data3);
+            trainingData.AddRange(data4);
+        }
+
+        public void Train(List<ExpenseData> data) {
+            this.trainingData = data;
+        }
+
+
+        public string Classify(string description) {
+            return "Khác";
+        }
+    }
+
+    public class ExpensePredictor {
+        private List<IExpenseClassifer> classifers;
+
+        public ExpensePredictor(List<IExpenseClassifer> classifers) {
+            this.classifers = classifers;
+        }
+
+        public string Predict(string description) {
+            foreach (var classifer in classifers) {
+                string ans = classifer.Classify(description);
+                if (ans != "Khác")
+                    return ans;
+            }
+            return "Khác";
+        }
     }
 
     public class ExpenseManager {
@@ -48,6 +159,8 @@ namespace SmartExpense {
                 expenses = JsonSerializer.Deserialize<List<Expense>>(json);
             }
         }
+
+
     }
 
 }

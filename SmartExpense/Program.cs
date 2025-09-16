@@ -3,6 +3,7 @@ namespace SmartExpense {
         static void Main() {
             ApplicationConfiguration.Initialize();
             //Application.Run(new ReportForm());
+
             Application.Run(new AddExpenseForm());
         }
     }

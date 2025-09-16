@@ -16,6 +16,16 @@ namespace SmartExpense {
             InitializeComponent();
         }
 
+        private void AddExpenseForm_Load(object sender, EventArgs e) {
+            LogicsticRegression lr = new LogicsticRegression();
+            lr.LoadTrainingData();
+
+            manager.LoadExpensesFromFile();
+
+            dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = manager.Expenses;
+        }
+
         private void AmountLb(object sender, EventArgs e) {
             try {
                 decimal amount = decimal.Parse(txtAmount.Text);
@@ -67,21 +77,17 @@ namespace SmartExpense {
             MessageBox.Show("Save OK");
         }
 
-        private void AddExpenseForm_Load(object sender, EventArgs e) {
-            manager.LoadExpensesFromFile();
-
-            dataGridViewExpenses.DataSource = null;
-            dataGridViewExpenses.DataSource = manager.Expenses;
-        }
-
-        private void DoneLabel_Click(object sender, EventArgs e) {
-            ReportForm form1 = new ReportForm(manager); // pass manager to ReportForm
-            form1.Show();
-            this.Hide();
-        }
-
         private void txtAmount_TextChanged(object sender, EventArgs e) {
 
+        }
+
+        private void DoneLb(object sender, EventArgs e) {
+            ReportForm form1 = new ReportForm(manager);
+
+            form1.FormClosed += (s, args) => this.Close(); // when ReportForm is closed, also close the AddExpenseForm
+
+            form1.Show();
+            this.Hide();
         }
     }
 }
