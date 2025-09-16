@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
-using System.IO;
+using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SmartExpense {
     public class Expense {
@@ -44,6 +45,16 @@ namespace SmartExpense {
             }
             MessageBox.Show($"Đã xuất dữ liệu ra: {filePath}");
         }
+
+        public void Out(List<string> data) {
+            using (StreamWriter sw = new StreamWriter(filePath, false)) {
+                foreach (var val in data) {
+                    sw.WriteLine(val);
+                }
+            }
+            MessageBox.Show($"Đã xuất dữ liệu ra: {filePath}");
+        }
+
     }
 
     public interface IExpenseClassifer {
@@ -89,6 +100,7 @@ namespace SmartExpense {
             }
             return data;
         }
+
         public void LoadTrainingData() {
             Vietnamese vietnamese = new Vietnamese();
 
@@ -98,18 +110,77 @@ namespace SmartExpense {
             List<ExpenseData> data4 = this.LoadFromCsv("Data/khac.csv").Select(des => new ExpenseData(des.Label, vietnamese.RemoveDiacritics(des.Text))).ToList();
 
             DBG dbg = new DBG();
-            dbg.Out(data1);
+            //dbg.Out(data1);
 
             trainingData.AddRange(data1);
             trainingData.AddRange(data2);
             trainingData.AddRange(data3);
             trainingData.AddRange(data4);
+
+            TextVectorizer vectorizer = new TextVectorizer();
+            //vectorizer.Train(trainingData);
+
+            dbg.Out(vectorizer.getVocabulary());
+            //List<string> test = new List<string> { "an com", "mua ao", "xem phim", "an ca", "mua giay" };
+        }
+
+        public class TextVectorizer {
+            public List<string> vocabulary = new List<string>();
+
+            public List<string> getVocabulary() {
+                return vocabulary;
+            }
+
+            public List<string> setVocabulary(List<string> vocab) {
+                this.vocabulary = vocab;
+                return vocabulary;
+            }
+
+            //public void CollectWords(List<string> data) {
+            //    foreach (var val in data) {
+            //        string[] words = val.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            //        foreach (var word in words) {
+            //            if (!vocabulary.Contains(word)) {
+            //                vocabulary.Add(word);
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         public void Train(List<ExpenseData> data) {
-            this.trainingData = data;
-        }
+            public List<List<int>> res = new List<List<int>>();
+            public List<string> label = new List<string>();
 
+            this.trainingData = data;
+
+            foreach (var val in data) {
+                string[] words = val.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var word in words) {
+                    string w = word.ToLower();
+
+                    if (!vocabulary.Contains(w)) {
+                        vocabulary.Add(w);
+                    }
+                }
+            } // unique words
+
+            foreach (var val in trainingData) {
+                List<int> tmp = new List<int>();
+                string[] words = val.Text.Split(' ', StringSplitOPtions.RemoveEmptyEntries);
+
+                foreach (var vocaWord in vocabulary) {
+                    tmp.Add(words.Contains(vocaWord) ? 1 : 0);
+                }
+
+                res.Add(tmp);
+                label.Add(val.Label);
+            }
+
+
+        }
 
         public string Classify(string description) {
             return "Khác";
