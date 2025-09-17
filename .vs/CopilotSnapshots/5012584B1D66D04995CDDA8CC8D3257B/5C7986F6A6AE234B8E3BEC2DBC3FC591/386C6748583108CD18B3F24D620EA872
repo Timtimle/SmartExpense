@@ -17,6 +17,9 @@ namespace SmartExpense {
         }
 
         private void AddExpenseForm_Load(object sender, EventArgs e) {
+            LogicsticRegression lr = new LogicsticRegression();
+            lr.LoadTrainingData();
+
             manager.LoadExpensesFromFile();
 
             dataGridViewExpenses.DataSource = null;

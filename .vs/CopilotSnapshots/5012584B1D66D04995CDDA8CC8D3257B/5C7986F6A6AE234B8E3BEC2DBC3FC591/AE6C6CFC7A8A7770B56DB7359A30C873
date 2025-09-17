@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SmartExpense {
+    internal class KMeans {
+        private string category = "";
+        
+        public string Predict(string x) {
+            if (x.Contains("an")) category = "Food";
+            else if (x.Contains("choi")) category = "Entertaiment";
+            else category = "Other";
+            return category; 
+        }
+    }
+}

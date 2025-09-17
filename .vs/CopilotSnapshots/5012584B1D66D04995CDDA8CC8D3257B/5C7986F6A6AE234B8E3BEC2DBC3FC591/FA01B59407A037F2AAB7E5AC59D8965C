@@ -82,19 +82,9 @@ namespace SmartExpense {
         }
     }
 
-    public class Multiclass_LogicsticRegression : IExpenseClassifer {
+    public class LogicsticRegression : IExpenseClassifer {
         private List<ExpenseData> trainingData = new List<ExpenseData>();
-        private List<string> vocabulary = new List<string>();
 
-        public List<string> getVocabulary() => vocabulary;
-        public List<ExpenseData> getTrainingData() => trainingData;
-
-        public List<string> setVocabulary(List<string> vocab) {
-            this.vocabulary = vocab;
-            return vocabulary;
-        }
-
-        
         public List<ExpenseData> LoadFromCsv(string filePath) {
             List<ExpenseData> data = new List<ExpenseData>();
 
@@ -127,32 +117,59 @@ namespace SmartExpense {
             trainingData.AddRange(data3);
             trainingData.AddRange(data4);
 
+            TextVectorizer vectorizer = new TextVectorizer();
+            //vectorizer.Train(trainingData);
+
+            dbg.Out(vectorizer.getVocabulary());
             //List<string> test = new List<string> { "an com", "mua ao", "xem phim", "an ca", "mua giay" };
         }
 
-        public void Train(List<ExpenseData> data, bool isTrained) {
-            if (!isTrained)
-                return;
+        public class TextVectorizer {
+            public List<string> vocabulary = new List<string>();
 
-            trainingData = data;
+            public List<string> getVocabulary() {
+                return vocabulary;
+            }
 
-            List<List<int>> x = new List<List<int>>();
-            List<string> y = new List<string>();
+            public List<string> setVocabulary(List<string> vocab) {
+                this.vocabulary = vocab;
+                return vocabulary;
+            }
+
+            //public void CollectWords(List<string> data) {
+            //    foreach (var val in data) {
+            //        string[] words = val.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            //        foreach (var word in words) {
+            //            if (!vocabulary.Contains(word)) {
+            //                vocabulary.Add(word);
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        public void Train(List<ExpenseData> data) {
+            public List<List<int>> X = new List<List<int>>();
+            public List<string> y = new List<string>();
+
+            this.trainingData = data;
 
             foreach (var val in data) {
                 string[] words = val.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var word in words) {
                     string w = word.ToLower();
+
                     if (!vocabulary.Contains(w)) {
                         vocabulary.Add(w);
                     }
                 }
-            }
+            } // unique words
 
             foreach (var val in trainingData) {
                 List<int> tmp = new List<int>();
-                string[] words = val.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string[] words = val.Text.Split(' ', StringSplitOPtions.RemoveEmptyEntries);
 
                 foreach (var vocaWord in vocabulary) {
                     tmp.Add(words.Contains(vocaWord) ? 1 : 0);
@@ -162,76 +179,6 @@ namespace SmartExpense {
                 y.Add(val.Label);
             }
 
-            Dictionary<string, List<double>> weights = new Dictionary<string, List<double>>();
-            Dictionary<string, double> bias = new Dictionary<string, double>();
-            Random rand = new Random(42);
-
-            List<string> categories = y.Distinct().ToList();
-
-            foreach (var category in categories) {
-                weights[category] = new List<double>();
-
-                for (int i = 0; i < vocabulary.Count; ++i) {
-                    double randomWeight = (rand.NextDouble() - 0.5) * 0.01;
-                    weights[category].Add(randomWeight);
-                }
-                bias[category] = 0.0;
-            } // weights & bias
-
-            List<Dictionary<string, double>> allZ = new List<Dictionary<string, double>>();
-
-            foreach (var xi in x) {
-                Dictionary<string, double> z = new Dictionary<string, double>();
-
-                foreach (var category in categories) {
-                    double sum = bias[category];
-                    for (int i = 0; i < vocabulary.Count; ++i) {
-                        sum += weights[category][i] * xi[i];
-                    }
-                    z[category] = sum;
-                }
-                allZ.Add(z);
-            } // all logits z for all description and all category (z = sum(w[i] * x[i]) + b)
-
-            foreach (var z in allZ) {
-                double maxZ = double.MinValue;
-                foreach (var val in z.Values) {
-                    maxZ = Math.Max(maxZ, val);
-                } // find max to avoid overflow
-
-                Dictionary<string, double> expZ = new Dictionary<string, double>();
-                double sumExpZ = 0.0;
-                foreach (var val in z) {
-                    double e = Math.Exp(val.Value - maxZ);
-                    expZ[val.Key] = e;
-                    sumExpZ += e;
-                }
-
-                Dictionary<string, double> softMax = new Dictionary<string, double>();
-                foreach (var val in expZ) {
-                    softMax[val.Key] = val.Value / sumExpZ;
-                }
-                using (StreamWriter sw = new StreamWriter("logits_output.txt", false)) {
-                    foreach (var kv in softMax) {
-                        sw.WriteLine($"  {kv.Key}: {kv.Value:F4}");
-                    }
-                }
-
-            }
-
-            //using (StreamWriter sw = new StreamWriter("logits_output.txt", false)) {
-            //    for (int i = 0; i < allZ.Count; i++) {
-            //        sw.WriteLine($"Description #{i + 1}:");
-            //        foreach (var cat in allZ[i].Keys) {
-            //            sw.WriteLine($"  {cat}: {allZ[i][cat]}");
-            //        }
-            //        sw.WriteLine("--------------------------");
-            //    }
-
-            //}
-
-            //string filePath = "weights_output.txt";
-            //File.WriteAllText(filePath, msg);
 
         }
 
@@ -268,7 +215,9 @@ namespace SmartExpense {
             SaveExpensesToFile();
         }
 
-        public decimal GetTotal() => Expenses.Sum(x => x.Amount);
+        public decimal GetTotal() {
+            return Expenses.Sum(x => x.Amount);
+        }
 
         public void SaveExpensesToFile() {
             string json = JsonSerializer.Serialize(expenses, new JsonSerializerOptions { WriteIndented = true });

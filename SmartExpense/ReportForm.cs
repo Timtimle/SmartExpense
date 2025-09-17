@@ -25,6 +25,10 @@ namespace SmartExpense {
             txtTotalExpenses.Size = new Size(100, 25);
 
             UpdateTotal();
+
+            Multiclass_LogicsticRegression lr = new Multiclass_LogicsticRegression();
+            lr.LoadTrainingData();
+            lr.Train(lr.getTrainingData(), true);
         }
 
         private void totalExpenses_Click(object sender, EventArgs e) {

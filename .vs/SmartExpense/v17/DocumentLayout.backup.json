@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\expensemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\addexpenseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\addexpenseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,12 +19,12 @@
       "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\addexpenseform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\vietnamese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\vietnamese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\addexpenseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\addexpenseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\vietnamese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\vietnamese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|E:\\Projects\\SmartExpense\\smartexpense\\reportform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -37,6 +37,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\reportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\reportform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|e:\\projects\\smartexpense\\smartexpense\\expenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304554B1-BF13-460D-8C85-430ED1CCC2C1}|SmartExpense\\SmartExpense.csproj|solutionrelative:smartexpense\\expenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,15 +50,31 @@
       "DocumentGroups": [
         {
           "DockedHeight": 270,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
+              "Title": "Expenses.cs",
+              "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\Expenses.cs",
+              "RelativeDocumentMoniker": "SmartExpense\\Expenses.cs",
+              "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\Expenses.cs",
+              "RelativeToolTip": "SmartExpense\\Expenses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T10:37:59.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Vietnamese.cs",
               "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\Vietnamese.cs",
               "RelativeDocumentMoniker": "SmartExpense\\Vietnamese.cs",
@@ -86,7 +106,7 @@
               "RelativeDocumentMoniker": "SmartExpense\\ExpenseManager.cs",
               "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ExpenseManager.cs",
               "RelativeToolTip": "SmartExpense\\ExpenseManager.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAA0wF8AAABsAAAAAAAAAA==",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAhwNYAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T15:33:52.09Z",
               "EditorCaption": ""
@@ -94,12 +114,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ReportForm.cs",
+              "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs",
+              "RelativeDocumentMoniker": "SmartExpense\\ReportForm.cs",
+              "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs",
+              "RelativeToolTip": "SmartExpense\\ReportForm.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAADgvxwAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T15:45:19.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AddExpenseForm.cs",
               "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\AddExpenseForm.cs",
               "RelativeDocumentMoniker": "SmartExpense\\AddExpenseForm.cs",
               "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\AddExpenseForm.cs",
               "RelativeToolTip": "SmartExpense\\AddExpenseForm.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAtwBMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T15:45:27.459Z",
               "EditorCaption": ""
@@ -119,6 +152,19 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ReportForm.Designer.cs",
+              "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.Designer.cs",
+              "RelativeDocumentMoniker": "SmartExpense\\ReportForm.Designer.cs",
+              "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.Designer.cs",
+              "RelativeToolTip": "SmartExpense\\ReportForm.Designer.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowHgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T15:45:11.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
               "Title": "AddExpenseForm.cs [Design]",
               "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\AddExpenseForm.cs",
@@ -130,19 +176,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ReportForm.cs",
-              "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs",
-              "RelativeDocumentMoniker": "SmartExpense\\ReportForm.cs",
-              "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs",
-              "RelativeToolTip": "SmartExpense\\ReportForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T15:45:19.088Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
               "Title": "ReportForm.cs [Design]",
               "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs",
@@ -150,19 +183,8 @@
               "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.cs [Design]",
               "RelativeToolTip": "SmartExpense\\ReportForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T15:45:06.071Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ReportForm.Designer.cs",
-              "DocumentMoniker": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.Designer.cs",
-              "RelativeDocumentMoniker": "SmartExpense\\ReportForm.Designer.cs",
-              "ToolTip": "E:\\Projects\\SmartExpense\\SmartExpense\\ReportForm.Designer.cs",
-              "RelativeToolTip": "SmartExpense\\ReportForm.Designer.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowHgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T15:45:11.697Z"
+              "WhenOpened": "2025-09-14T15:45:06.071Z",
+              "EditorCaption": " [Design]"
             }
           ]
         },

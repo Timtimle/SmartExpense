@@ -17,6 +17,9 @@ namespace SmartExpense {
         }
 
         private void AddExpenseForm_Load(object sender, EventArgs e) {
+            LogicsticRegression lr = new LogicsticRegression();
+            lr.LoadTrainingData();
+
             manager.LoadExpensesFromFile();
 
             dataGridViewExpenses.DataSource = null;
@@ -48,25 +51,30 @@ namespace SmartExpense {
             }
         }
 
-        private void saveLabel_Click(object sender, EventArgs e) {
-            try {
-                decimal amount = decimal.Parse(txtAmount.Text);
-                string description = txtDescription.Text;
-                string category = new KMeans().Predict(description);
-                DateTime date = dateTimePicker1.Value;
+        private void SaveLb(object sender, EventArgs e) {
+            decimal amount = decimal.Parse(txtAmount.Text);
+            string description = txtDescription.Text;
+            DateTime date = dateTimePicker1.Value;
+            string category = "unknown";
 
-                var manager = new ExpenseManager();
-                var newExpense = new Expense(amount, description, date, category);
-                manager.AddExpense(newExpense);
+            if (string.IsNullOrWhiteSpace(txtAmount.Text)) {
+                MessageBox.Show("Amount cannot be empty");
+                return;
+            }
 
-                this.Close();
+            if (string.IsNullOrWhiteSpace(description)) {
+                MessageBox.Show("Description cannot be empty");
+                return;
             }
-            catch (FormatException) {
-                MessageBox.Show("Please enter a valid amount", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex) {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            Expense newExpense = new Expense(amount, description, date, category);
+
+            manager.AddExpense(newExpense);
+
+            dataGridViewExpenses.DataSource = null;
+            dataGridViewExpenses.DataSource = manager.Expenses;
+
+            MessageBox.Show("Save OK");
         }
 
         private void txtAmount_TextChanged(object sender, EventArgs e) {

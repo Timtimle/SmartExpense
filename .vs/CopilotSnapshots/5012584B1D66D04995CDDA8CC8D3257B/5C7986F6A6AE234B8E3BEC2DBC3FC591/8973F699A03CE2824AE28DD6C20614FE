@@ -74,7 +74,7 @@
             SaveLabel.Size = new Size(31, 15);
             SaveLabel.TabIndex = 3;
             SaveLabel.Text = "Save";
-            SaveLabel.Click += saveLabel_Click;
+            SaveLabel.Click += SaveLb;
             // 
             // dateTimePicker1
             // 
