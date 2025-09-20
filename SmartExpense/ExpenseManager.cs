@@ -257,7 +257,7 @@ namespace SmartExpense {
         }
 
         public string Classify(string description) {
-            string[] words = description.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            string[] words = description.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
             List<int> x = new List<int>();
             foreach (var vocaWord in vocabulary) {
                 x.Add(words.Contains(vocaWord) ? 1 : 0);
@@ -314,6 +314,33 @@ namespace SmartExpense {
             weights = modelData.Weights;
             bias = modelData.Bias;
         }
+
+        public double EvaluateAccuracy(List<ExpenseData> testData) {
+            int correct = 0;
+
+            Vietnamese vietnamese = new Vietnamese();
+
+            foreach (var item in testData) {
+                string input = vietnamese.RemoveDiacritics(item.Text.ToLower());
+                string predicted = Classify(input);
+
+                string predictedNorm = vietnamese.RemoveDiacritics(predicted).ToLower();
+                string trueLabelNorm = vietnamese.RemoveDiacritics(item.Label).ToLower();
+
+                if (predictedNorm == trueLabelNorm)
+                    correct++;
+                using (StreamWriter sw = new StreamWriter("accurtest.txt", true)) {
+                    //if (predictedNorm == trueLabelNorm)
+                    //    sw.WriteLine(item.Label);
+                    //else
+                        sw.WriteLine($"True: {trueLabelNorm} - Predicted: {predictedNorm}" + " " + testData.Count + " " + correct + " " + (double)correct / testData.Count);
+                }
+
+            }
+
+            return (double)correct / testData.Count;
+        }
+
     }
 
     public class ExpensePredictor {

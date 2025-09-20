@@ -28,13 +28,30 @@
                 mlr.SaveModel(modelFile);
             }
 
-            string input = "ăn cức chó";
+            string input = "mua bao cao su";
             Vietnamese vietnamese = new Vietnamese();
             string inputNoDiacritics = vietnamese.RemoveDiacritics(input);
-
             string category = mlr.Classify(inputNoDiacritics);
 
-            MessageBox.Show("Input: " + input + "\nPredicted Category: " + category, "Prediction Result"); 
+            string testFile = "test.txt";
+
+            List<ExpenseData> testData = new List<ExpenseData> {
+                new ExpenseData("Ăn Uống", vietnamese.RemoveDiacritics("ăn cơm").ToLower()),
+                new ExpenseData("Mua Sắm", vietnamese.RemoveDiacritics("con di me may").ToLower()),
+                new ExpenseData("Giải Trí", vietnamese.RemoveDiacritics("xem phim").ToLower())
+            };
+
+            double accuracy = mlr.EvaluateAccuracy(testData);
+
+            //if (File.Exists(testFile)) {
+            //    List<ExpenseData> testData = mlr.LoadFromCsv(testFile).Select(d => new ExpenseData(d.Label, vietnamese.RemoveDiacritics(d.Text))).ToList();
+            //    accuracy = mlr.EvaluateAccuracy(testData);
+            //    Console.WriteLine($"Model accuracy: {accuracy:P2}");
+            //} else {
+            //    Console.WriteLine("Test file not found. Skipping evaluation.");
+            //}
+
+            MessageBox.Show($"Input: {input}\nPredicted Category: {category}\nAccuracy (test set): {accuracy:P2}","Prediction Result");
         }
 
         private void ReportForm_Load(object sender, EventArgs e) {

@@ -1,0 +1,3 @@
+True: an uong - Predicted: an uong 3 1 0.3333333333333333
+True: mua sam - Predicted: khac 3 1 0.3333333333333333
+True: giai tri - Predicted: giai tri 3 2 0.6666666666666666
