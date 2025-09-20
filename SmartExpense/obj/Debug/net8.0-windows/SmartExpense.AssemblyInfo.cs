@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartExpense")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b592080bf561648dd13ee41bfae043a816dfba9d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23372f0fe508b2cfc27382257719f47d43304dba")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartExpense")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartExpense")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

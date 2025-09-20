@@ -85,6 +85,8 @@ namespace SmartExpense {
     public class Multiclass_LogicsticRegression : IExpenseClassifer {
         private List<ExpenseData> trainingData = new List<ExpenseData>();
         private List<string> vocabulary = new List<string>();
+        private Dictionary<string, List<double>> weights;
+        private Dictionary<string, double> bias;
 
         public List<string> getVocabulary() => vocabulary;
         public List<ExpenseData> getTrainingData() => trainingData;
@@ -94,7 +96,7 @@ namespace SmartExpense {
             return vocabulary;
         }
 
-        
+
         public List<ExpenseData> LoadFromCsv(string filePath) {
             List<ExpenseData> data = new List<ExpenseData>();
 
@@ -130,14 +132,13 @@ namespace SmartExpense {
             //List<string> test = new List<string> { "an com", "mua ao", "xem phim", "an ca", "mua giay" };
         }
 
-        public void Train(List<ExpenseData> data, bool isTrained) {
+        public void Train(List<ExpenseData> data, int epochs, bool isTrained) {
             if (!isTrained)
                 return;
 
             trainingData = data;
-
-            List<List<int>> x = new List<List<int>>();
-            List<string> y = new List<string>();
+            weights = new Dictionary<string, List<double>>();
+            bias = new Dictionary<string, double>();
 
             foreach (var val in data) {
                 string[] words = val.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -149,6 +150,9 @@ namespace SmartExpense {
                     }
                 }
             }
+
+            List<List<int>> x = new List<List<int>>();
+            List<string> y = new List<string>();
 
             foreach (var val in trainingData) {
                 List<int> tmp = new List<int>();
@@ -162,10 +166,7 @@ namespace SmartExpense {
                 y.Add(val.Label);
             }
 
-            Dictionary<string, List<double>> weights = new Dictionary<string, List<double>>();
-            Dictionary<string, double> bias = new Dictionary<string, double>();
             Random rand = new Random(42);
-
             List<string> categories = y.Distinct().ToList();
 
             foreach (var category in categories) {
@@ -178,65 +179,140 @@ namespace SmartExpense {
                 bias[category] = 0.0;
             } // weights & bias
 
-            List<Dictionary<string, double>> allZ = new List<Dictionary<string, double>>();
+            for (int epoch = 0; epoch < epochs; ++epoch) {
+                List<Dictionary<string, double>> allZ = new List<Dictionary<string, double>>();
 
-            foreach (var xi in x) {
-                Dictionary<string, double> z = new Dictionary<string, double>();
+                foreach (var xi in x) {
+                    Dictionary<string, double> z = new Dictionary<string, double>();
 
-                foreach (var category in categories) {
-                    double sum = bias[category];
-                    for (int i = 0; i < vocabulary.Count; ++i) {
-                        sum += weights[category][i] * xi[i];
+                    foreach (var category in categories) {
+                        double sum = bias[category];
+                        for (int i = 0; i < vocabulary.Count; ++i) {
+                            sum += weights[category][i] * xi[i];
+                        }
+                        z[category] = sum;
                     }
-                    z[category] = sum;
-                }
-                allZ.Add(z);
-            } // all logits z for all description and all category (z = sum(w[i] * x[i]) + b)
+                    allZ.Add(z);
+                } // all logits z for all description and all category (z = sum(w[i] * x[i]) + b)
 
-            foreach (var z in allZ) {
-                double maxZ = double.MinValue;
-                foreach (var val in z.Values) {
-                    maxZ = Math.Max(maxZ, val);
-                } // find max to avoid overflow
+                List<Dictionary<string, double>> allSoftMax = new List<Dictionary<string, double>>();
 
-                Dictionary<string, double> expZ = new Dictionary<string, double>();
-                double sumExpZ = 0.0;
-                foreach (var val in z) {
-                    double e = Math.Exp(val.Value - maxZ);
-                    expZ[val.Key] = e;
-                    sumExpZ += e;
-                }
+                foreach (var z in allZ) {
+                    double maxZ = double.MinValue;
+                    foreach (var val in z.Values) {
+                        maxZ = Math.Max(maxZ, val);
+                    } // find max to avoid overflow
 
-                Dictionary<string, double> softMax = new Dictionary<string, double>();
-                foreach (var val in expZ) {
-                    softMax[val.Key] = val.Value / sumExpZ;
-                }
-                using (StreamWriter sw = new StreamWriter("logits_output.txt", false)) {
-                    foreach (var kv in softMax) {
-                        sw.WriteLine($"  {kv.Key}: {kv.Value:F4}");
+                    Dictionary<string, double> expZ = new Dictionary<string, double>();
+                    double sumExpZ = 0.0;
+                    foreach (var val in z) {
+                        double e = Math.Exp(val.Value - maxZ);
+                        expZ[val.Key] = e;
+                        sumExpZ += e;
                     }
-                }
 
+                    Dictionary<string, double> softMax = new Dictionary<string, double>();
+                    foreach (var val in expZ) {
+                        softMax[val.Key] = val.Value / sumExpZ;
+                    }
+
+                    allSoftMax.Add(softMax);
+
+                    //using (StreamWriter sw = new StreamWriter("logits_output.txt", false)) {
+                    //    foreach (var kv in softMax) {
+                    //        sw.WriteLine($"  {kv.Key}: {kv.Value:F4}");
+                    //    }
+                    //}
+
+                } // Softmax
+
+                double totalLoss = 0.0;
+                for (int i = 0; i < allSoftMax.Count; ++i) {
+                    Dictionary<string, double> softMax = allSoftMax[i];
+                    string trueLabel = y[i];
+                    double epsilon = 1e-15;
+                    double predictedProb = Math.Max(softMax[trueLabel], epsilon); // probability assigned to the true class
+                    double loss = -Math.Log(predictedProb);
+                    totalLoss += loss;
+                }
+                double avgLoss = totalLoss / allSoftMax.Count; // cross-entropy loss
+
+                double learningRate = 0.01;
+                for (int j = 0; j < x.Count; ++j) {
+                    List<int> xi = x[j];
+                    string trueLabel = y[j];
+                    Dictionary<string, double> softMax = allSoftMax[j];
+
+                    foreach (var category in categories) {
+                        double y_c = (trueLabel == category) ? 1.0 : 0.0;
+                        for (int i = 0; i < vocabulary.Count; ++i) {
+                            double gradient_w = (softMax[category] - y_c) * xi[i];
+                            weights[category][i] = weights[category][i] - learningRate * gradient_w;
+                        }
+                        double gradient_b = softMax[category] - y_c;
+                        bias[category] = bias[category] - learningRate * gradient_b;
+                    }
+                } // Gradient Descent update weights & bias 
             }
-
-            //using (StreamWriter sw = new StreamWriter("logits_output.txt", false)) {
-            //    for (int i = 0; i < allZ.Count; i++) {
-            //        sw.WriteLine($"Description #{i + 1}:");
-            //        foreach (var cat in allZ[i].Keys) {
-            //            sw.WriteLine($"  {cat}: {allZ[i][cat]}");
-            //        }
-            //        sw.WriteLine("--------------------------");
-            //    }
-
-            //}
-
-            //string filePath = "weights_output.txt";
-            //File.WriteAllText(filePath, msg);
-
         }
 
         public string Classify(string description) {
-            return "Khác";
+            string[] words = description.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            List<int> x = new List<int>();
+            foreach (var vocaWord in vocabulary) {
+                x.Add(words.Contains(vocaWord) ? 1 : 0);
+            }
+
+            Dictionary<string, double> z = new Dictionary<string, double>();
+            foreach (var category in weights.Keys) {
+                double sum = bias[category];
+                for (int i = 0; i < vocabulary.Count; ++i) {
+                    sum += weights[category][i] * x[i];
+                }
+                z[category] = sum;
+            }
+
+            double maxZ = z.Values.Max();
+            Dictionary<string, double> expZ = z.ToDictionary(kv => kv.Key, kv => Math.Exp(kv.Value - maxZ));
+            double sumExpZ = expZ.Values.Sum();
+            Dictionary<string, double> softMax = expZ.ToDictionary(kv => kv.Key, kv => kv.Value / sumExpZ);
+
+            string predictedCategory = null;
+            double maxProb = double.MinValue;
+            foreach (var val in softMax) {
+                if (val.Value > maxProb) {
+                    maxProb = val.Value;
+                    predictedCategory = val.Key;
+                }
+            }
+
+            return predictedCategory;
+        }
+
+        public class ModelData {
+            public List<string> Vocabulary { get; set; }
+            public Dictionary<string, List<double>> Weights { get; set; }
+            public Dictionary<string, double> Bias { get; set; }
+        }
+
+        public void SaveModel(string filePath) {
+            ModelData model = new ModelData {
+                Vocabulary = vocabulary,
+                Weights = weights,
+                Bias = bias
+            };
+
+            File.WriteAllText(filePath, JsonSerializer.Serialize(model, new JsonSerializerOptions { WriteIndented = true }));
+        }
+
+        public void LoadModel(string filePath) {
+            if (!File.Exists(filePath)) return;
+
+            ModelData modelData = JsonSerializer.Deserialize<ModelData>(File.ReadAllText(filePath));
+
+            vocabulary = modelData.Vocabulary;
+            weights = modelData.Weights;
+            bias = modelData.Bias;
         }
     }
 

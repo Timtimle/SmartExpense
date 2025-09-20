@@ -1,4 +1,4 @@
-namespace SmartExpense {
+﻿namespace SmartExpense {
     public partial class ReportForm : Form {
         private ExpenseManager manager = new ExpenseManager();
 
@@ -14,7 +14,27 @@ namespace SmartExpense {
         }
 
         public void UpdateTotal() {
+            string modelFile = "model.json";
+            Multiclass_LogicsticRegression mlr = new Multiclass_LogicsticRegression();
+
             txtTotalExpenses.Text = manager.GetTotal().ToString("N0");
+
+            if (File.Exists(modelFile)) {
+                mlr.LoadModel(modelFile);
+            } else {
+                mlr.LoadTrainingData();
+                mlr.Train(mlr.getTrainingData(), 100, true);
+
+                mlr.SaveModel(modelFile);
+            }
+
+            string input = "ăn cức chó";
+            Vietnamese vietnamese = new Vietnamese();
+            string inputNoDiacritics = vietnamese.RemoveDiacritics(input);
+
+            string category = mlr.Classify(inputNoDiacritics);
+
+            MessageBox.Show("Input: " + input + "\nPredicted Category: " + category, "Prediction Result"); 
         }
 
         private void ReportForm_Load(object sender, EventArgs e) {
@@ -25,10 +45,6 @@ namespace SmartExpense {
             txtTotalExpenses.Size = new Size(100, 25);
 
             UpdateTotal();
-
-            Multiclass_LogicsticRegression lr = new Multiclass_LogicsticRegression();
-            lr.LoadTrainingData();
-            lr.Train(lr.getTrainingData(), true);
         }
 
         private void totalExpenses_Click(object sender, EventArgs e) {
